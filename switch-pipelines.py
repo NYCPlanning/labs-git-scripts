@@ -50,12 +50,15 @@ with open('test-repos.txt') as csv_file:
                     issues.append(issue_data[j]['number'])
 
             # get pull requests data
-            pr_url = 'https://api.github.com/repos/%s/%s/pulls' % (REPO_OWNER, repo_name)
+            pr_url = 'https://api.github.com/repos/%s/%s/pulls?state=all' % (REPO_OWNER, repo_name)
             pr_response = requests.get(pr_url, headers=GIT_HEADER)
             pr_data = json.loads(pr_response.text)
             pulls = []
+            pulls_num = []
             for k, item in enumerate(pr_data):
                     pulls.append(re.split(':| |-',(pr_data[k]['title']))[0])
+                    pulls_num.append([pr_data[k]['number'], pr_data[k]['merged_at']])
+            print(pulls_num)
 
             # get board data
             board_url = 'https://api.zenhub.io/p1/repositories/%s/board' % (repo_id)
@@ -67,28 +70,23 @@ with open('test-repos.txt') as csv_file:
 
 
             # move issue to 'In Progress' if it corresponds to a feature branch
-            for l in issues:
-                    if str(l) in branches:
-                            url = 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, l)
+            for num in issues:
+                    if str(num) in branches:
+                            url = 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, num)
                             params = {'pipeline_id':in_progress_id, 'position':'bottom'}
                             response = requests.post(url, json=params, headers=ZEN_HEADER)
 
             # move issue to 'Review/QA' if PR has been opened
-            for m in issues:
-                    if str(m) in pulls:
-                            url= 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, m)
+            for num in issues:
+                    if str(num) in pulls:
+                            url= 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, num)
                             params = {'pipeline_id':review_id, 'position':'bottom'}
                             response = requests.post(url, json=params, headers=ZEN_HEADER)
 
             # move issue to 'Staging' if PR has been merged into develop
-            for n in pulls:
-                    url = 'https://api.github.com/repos/%s/%s/pulls/%d/merge' % (REPO_OWNER, repo_id, int(n))
-                    response = requests.get(url, headers=GIT_HEADER)
-                    # check if PR has been merged
-                    print(response.status_code)
-                    if (200 <= response.status_code  <= 200):
-                            url = 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, n)
-                            params = {'pipeline_id':STAGING_id, 'position':'bottom'}
-                            response = requests.post(url, json=params, headers=ZEN_HEADER)
-                            print(response.status_code)
+            for num, merged_at in pulls_num:
+                    if (merged_at != None):
+                        url = 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, num)
+                        params = {'pipeline_id':staging_id, 'position':'bottom'}
+                        response = requests.post(url, json=params, headers=ZEN_HEADER)
   
