@@ -56,7 +56,6 @@ with open('test-repos.txt') as csv_file:
             for k, item in enumerate(pr_data):
                     pulls.append(re.split(':| |-',(pr_data[k]['title']))[0])
                     pulls_num.append([pr_data[k]['number'], pr_data[k]['merged_at']])
-            print(pulls_num)
 
             # get board data
             board_url = 'https://api.zenhub.io/p1/repositories/%s/board' % (repo_id)
@@ -65,7 +64,6 @@ with open('test-repos.txt') as csv_file:
             in_progress_id = board_data['pipelines'][IN_PROGRESS]['id']
             review_id = board_data['pipelines'][REVIEW]['id']
             staging_id = board_data['pipelines'][STAGING]['id']
-
 
             # move issue to 'In Progress' if it corresponds to a feature branch
             for num in issues:
