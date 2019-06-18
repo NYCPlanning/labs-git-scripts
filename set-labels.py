@@ -4,7 +4,7 @@ import csv
 import requests
 import sys
 
-TOKEN = sys.argv[1] #'c70097cba0c4522c92db1a5cd966d79bff8f12d8' #sys.argv[1]
+TOKEN = sys.argv[1]
 REPO_OWNER = 'NYCPlanning'
 HEADER = {'Authorization': 'token ' + TOKEN, 'Accept': 'application/vnd.github.symmetra-preview+json'}
 
