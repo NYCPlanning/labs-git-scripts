@@ -2,7 +2,7 @@
 
 import csv
 import requests
-import itertools
+import sys
 
 TOKEN = sys.argv[1]
 REPO_OWNER = 'NYCPlanning'

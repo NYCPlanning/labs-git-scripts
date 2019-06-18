@@ -5,6 +5,8 @@
 import csv
 import json
 import requests
+import sys
+import re
 
 IN_PROGRESS = 4
 REVIEW = 5
@@ -37,7 +39,7 @@ with open('test-repos.txt') as csv_file:
             branch_data = json.loads(branch_response.text)
             branches = []
             for i, item in enumerate(branch_data):
-                    branches.append(branch_data[i]['name'].split('-')[0])
+                    branches.append(re.split(':| |-',(branch_data[i]['name']))[0])
 
             # get issues data
             issue_url = 'https://api.github.com/repos/%s/%s/issues' % (REPO_OWNER, repo_name)
@@ -53,7 +55,7 @@ with open('test-repos.txt') as csv_file:
             pr_data = json.loads(pr_response.text)
             pulls = []
             for k, item in enumerate(pr_data):
-                    pulls.append(pr_data[k]['title'].split(':')[0])
+                    pulls.append(re.split(':| |-',(pr_data[k]['title']))[0])
 
             # get board data
             board_url = 'https://api.zenhub.io/p1/repositories/%s/board' % (repo_id)
