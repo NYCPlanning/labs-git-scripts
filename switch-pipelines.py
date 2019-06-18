@@ -1,7 +1,5 @@
 # This script will move issues between pipelines on a ZenHub board
 
-# note: code assumes naming convention for branches and PRs is 123-.... with 123 being the corresponding issue #
-
 import csv
 import json
 import requests
