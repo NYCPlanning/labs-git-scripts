@@ -6,7 +6,6 @@ import itertools
 
 TOKEN = sys.argv[1]
 REPO_OWNER = 'NYCPlanning'
-#REPO_NAME = 'labs-zola'
 HEADER = {'Authorization': 'token ' + TOKEN}
 
 f1 = open('test-repos.txt')

@@ -11,9 +11,8 @@ REVIEW = 5
 STAGING = 6
 
 GTOKEN = sys.argv[1]
-ZTOKEN = sys.argv[2] #'1bfebe684cc282ecad08185efcd642d1e93d5ca424b4cb614a07d1918e071542307a7c67c5cd3fd5'
+ZTOKEN = sys.argv[2]
 REPO_OWNER = 'NYCPlanning'
-#REPO_NAME = 'ceqr-app'
 GIT_HEADER = {'Authorization': 'token ' + GTOKEN}
 ZEN_HEADER = {'X-Authentication-Token': ZTOKEN}
 
