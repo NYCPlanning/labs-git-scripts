@@ -4,7 +4,7 @@ import csv
 import requests
 import itertools
 
-TOKEN = 'e633eaf50861324a34ba878f7fb6161a94c6dd7f'
+TOKEN = sys.argv[1]
 REPO_OWNER = 'NYCPlanning'
 #REPO_NAME = 'labs-zola'
 HEADER = {'Authorization': 'token ' + TOKEN}

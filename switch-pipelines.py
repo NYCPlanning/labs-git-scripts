@@ -10,8 +10,8 @@ IN_PROGRESS = 4
 REVIEW = 5
 STAGING = 6
 
-GTOKEN = 'e633eaf50861324a34ba878f7fb6161a94c6dd7f'
-ZTOKEN = '1bfebe684cc282ecad08185efcd642d1e93d5ca424b4cb614a07d1918e071542307a7c67c5cd3fd5'
+GTOKEN = sys.argv[1]
+ZTOKEN = sys.argv[2] #'1bfebe684cc282ecad08185efcd642d1e93d5ca424b4cb614a07d1918e071542307a7c67c5cd3fd5'
 REPO_OWNER = 'NYCPlanning'
 #REPO_NAME = 'ceqr-app'
 GIT_HEADER = {'Authorization': 'token ' + GTOKEN}

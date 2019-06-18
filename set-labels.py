@@ -2,10 +2,10 @@
 
 import csv
 import requests
+import sys
 
-TOKEN = 'e633eaf50861324a34ba878f7fb6161a94c6dd7f'
+TOKEN = sys.argv[1] #'c70097cba0c4522c92db1a5cd966d79bff8f12d8' #sys.argv[1]
 REPO_OWNER = 'NYCPlanning'
-# REPO_NAME = 'labs-cd-files'
 HEADER = {'Authorization': 'token ' + TOKEN, 'Accept': 'application/vnd.github.symmetra-preview+json'}
 
 TO_DELETE = ['bug', 'duplicate', 'enhancement', 'help%20wanted', 'good%20first%20issue', 'invalid', 'question', 'wontfix', 'documentation']
