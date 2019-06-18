@@ -28,24 +28,24 @@ DESC = ['High impact, high level of effort. Used for work prioritization.',
 COLORS = ['6600bb', '660066', 'bb0066', 'bb00bb', '92ad27', 'd36315', 'e21f18', 'eaac72', 'e5df37', '32c9a6', 'aee5ef', '5319e7', 'c9f29b', '2278c9']
 
 with open('test-repos.txt') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        line_count = 0
-        for row in csv_reader:
-                if line_count == 0:
-                        line_count+=1
-                else:
-                        repo_name = row[0]
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    line_count = 0
+    for row in csv_reader:
+        if line_count == 0:
+            line_count+=1
+        else:
+            repo_name = row[0]
 
-                        # Delete GitHub's default labels
-                        for i in TO_DELETE:
-                                DELETE_URL = 'https://api.github.com/repos/%s/%s/labels/%s' % (REPO_OWNER, repo_name, i)
-                                response = requests.delete(DELETE_URL, headers=HEADER)
+            # Delete GitHub's default labels
+            for i in TO_DELETE:
+                    DELETE_URL = 'https://api.github.com/repos/%s/%s/labels/%s' % (REPO_OWNER, repo_name, i)
+                    response = requests.delete(DELETE_URL, headers=HEADER)
 
-                        # Create custom labels
-                        CREATE_URL = 'https://api.github.com/repos/%s/%s/labels' % (REPO_OWNER, repo_name)
-                        for j in range(14):
-                                PARAMS = {"name":TO_CREATE[j], "description":DESC[j], "color":COLORS[j]}
-                                response = requests.post(CREATE_URL, json=PARAMS, headers=HEADER)
+            # Create custom labels
+            CREATE_URL = 'https://api.github.com/repos/%s/%s/labels' % (REPO_OWNER, repo_name)
+            for j in range(14):
+                    PARAMS = {"name":TO_CREATE[j], "description":DESC[j], "color":COLORS[j]}
+                    response = requests.post(CREATE_URL, json=PARAMS, headers=HEADER)
 
-                        line_count+=1
+            line_count+=1
                

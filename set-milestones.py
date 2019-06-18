@@ -16,20 +16,20 @@ csv_f2 = csv.reader(f2, delimiter=',')
 
 line_count = 0
 for row in csv_f1: 
-        if line_count == 0:
-                line_count+=1
-        else:
-                repo_name = row[0]
+    if line_count == 0:
+            line_count+=1
+    else:
+            repo_name = row[0]
 
 line_count = 0
 for row2 in csv_f2:
-        if line_count == 0:
-                line_count+=1
-        else:
-                # Set milestone
-                title = row2[0]
-                due_on = row2[1]
-                url = 'https://api.github.com/repos/%s/%s/milestones' % (REPO_OWNER, repo_name)
-                params = {"title":title, "due_on":due_on}
-                response = requests.post(url, json=params, headers=HEADER)
-                line_count+=1
+    if line_count == 0:
+        line_count+=1
+    else:
+        # Set milestone
+        title = row2[0]
+        due_on = row2[1]
+        url = 'https://api.github.com/repos/%s/%s/milestones' % (REPO_OWNER, repo_name)
+        params = {"title":title, "due_on":due_on}
+        response = requests.post(url, json=params, headers=HEADER)
+        line_count+=1
