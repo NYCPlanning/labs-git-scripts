@@ -1,4 +1,5 @@
 Repos
+ceqr-app
 ember-labs-maps
 labs-app-currently-down
 labs-applicantmaps

@@ -8,8 +8,8 @@ TOKEN = sys.argv[1]
 REPO_OWNER = 'NYCPlanning'
 HEADER = {'Authorization': 'token ' + TOKEN}
 
-f1 = open('test-repos.txt')
-f2 = open('sprints.txt')
+f1 = open('./csv/test-repos.txt')
+f2 = open('./csv/sprints.txt')
 
 csv_f1 = csv.reader(f1, delimiter=',')
 csv_f2 = csv.reader(f2, delimiter=',')

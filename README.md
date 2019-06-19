@@ -1,2 +1,3 @@
 # labs-git-scripts
-Scripts to streamline workflow
+Scripts to streamline Labs workflow
+
