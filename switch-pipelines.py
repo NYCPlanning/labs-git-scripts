@@ -16,7 +16,7 @@ REPO_OWNER = 'NYCPlanning'
 GIT_HEADER = {'Authorization': 'token ' + GTOKEN}
 ZEN_HEADER = {'X-Authentication-Token': ZTOKEN}
 
-with open('test-repos.txt') as csv_file:
+with open('./csv/test-repos.txt') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     for row in csv_reader:

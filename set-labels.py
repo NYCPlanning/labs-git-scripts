@@ -27,7 +27,7 @@ DESC = ['High impact, high level of effort. Used for work prioritization.',
         'Issue or user story is unclear. More info needed.']
 COLORS = ['6600bb', '660066', 'bb0066', 'bb00bb', '92ad27', 'd36315', 'e21f18', 'eaac72', 'e5df37', '32c9a6', 'aee5ef', '5319e7', 'c9f29b', '2278c9']
 
-with open('test-repos.txt') as csv_file:
+with open('./csv/test-repos.txt') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     for row in csv_reader:
