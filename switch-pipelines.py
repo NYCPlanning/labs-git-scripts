@@ -85,4 +85,6 @@ with open('test-repos.txt') as csv_file:
                         url = 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, num)
                         params = {'pipeline_id':staging_id, 'position':'bottom'}
                         response = requests.post(url, json=params, headers=ZEN_HEADER)
+
+            line_count+=1
   
