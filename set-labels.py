@@ -37,15 +37,15 @@ with open('./csv/test-repos.txt') as csv_file:
             repo_name = row[0]
 
             # Delete GitHub's default labels
-            for i in TO_DELETE:
+            for i in TO_CREATE:
                     DELETE_URL = 'https://api.github.com/repos/%s/%s/labels/%s' % (REPO_OWNER, repo_name, i)
                     response = requests.delete(DELETE_URL, headers=HEADER)
 
             # Create custom labels
-            CREATE_URL = 'https://api.github.com/repos/%s/%s/labels' % (REPO_OWNER, repo_name)
-            for j in range(14):
-                    PARAMS = {"name":TO_CREATE[j], "description":DESC[j], "color":COLORS[j]}
-                    response = requests.post(CREATE_URL, json=PARAMS, headers=HEADER)
+            # CREATE_URL = 'https://api.github.com/repos/%s/%s/labels' % (REPO_OWNER, repo_name)
+            # for j in range(14):
+            #         PARAMS = {"name":TO_CREATE[j], "description":DESC[j], "color":COLORS[j]}
+            #         response = requests.post(CREATE_URL, json=PARAMS, headers=HEADER)
 
             line_count+=1
                
