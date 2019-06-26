@@ -6,7 +6,7 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 
-REPO_LIST = './csv/test-repos.txt'
+REPO_LIST = './csv/repos.txt'
 REPO_OWNER = 'NYCPlanning'
 TOKEN = os.environ['GITHUB_PERSONAL_ACCESS_TOKEN']
 HEADER = {'Authorization': 'token ' + TOKEN, 'Accept': 'application/vnd.github.symmetra-preview+json'}
