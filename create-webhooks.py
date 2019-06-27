@@ -4,8 +4,8 @@ import csv
 import os
 import requests
 from dotenv import load_dotenv
-load_dotenv()
 
+load_dotenv()
 REPO_LIST = './csv/repos.txt'
 REPO_OWNER = 'NYCPlanning'
 TOKEN = os.environ['GITHUB_PERSONAL_ACCESS_TOKEN']
