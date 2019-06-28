@@ -19,6 +19,7 @@ labs-factfinder-acs-munge
 labs-factfinder-api
 labs-factfinder-db
 labs-foundation
+labs-git-scripts
 labs-geocoder-ui
 labs-geojson2mvt
 labs-geosearch-acceptance-tests
