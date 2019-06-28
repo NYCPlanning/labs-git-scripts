@@ -5,31 +5,47 @@ import requests
 import sys
 
 TOKEN = sys.argv[1]
+REPO = sys.argv[2]
 REPO_OWNER = 'NYCPlanning'
+REPO_LIST = './csv/test-repos.txt'
+SPRINT_LIST = './csv/sprints.txt'
 HEADER = {'Authorization': 'token ' + TOKEN}
 
-f1 = open('./csv/test-repos.txt')
-f2 = open('./csv/sprints.txt')
+def set_milestone(repo, line):
+    title = line[0]
+    due_on = line[1]
+    url = 'https://api.github.com/repos/%s/%s/milestones' % (REPO_OWNER, repo)
+    params = {"title":title, "due_on":due_on}
+    response = requests.post(url, json=params, headers=HEADER)
 
-csv_f1 = csv.reader(f1, delimiter=',')
-csv_f2 = csv.reader(f2, delimiter=',')
+if REPO == 'all':
+    with open(REPO_LIST) as csv_file:
+        csv_f1 = csv.reader(csv_file, delimiter=',')
+        f1_count = 0
+        for row in csv_f1: 
+            if f1_count == 0:
+                f1_count+=1
+            else:
+                repo_name = row[0]
 
-line_count = 0
-for row in csv_f1: 
-    if line_count == 0:
-            line_count+=1
-    else:
-            repo_name = row[0]
+                with open(SPRINT_LIST) as csv_file:
+                    csv_f2 = csv.reader(csv_file, delimiter=',')
+                    f2_count = 0
+                    for row2 in csv_f2:
+                        if f2_count == 0:
+                            f2_count+=1
+                        else:
+                            set_milestone(repo_name, row2)
+                            f2_count+=1
 
-line_count = 0
-for row2 in csv_f2:
-    if line_count == 0:
-        line_count+=1
-    else:
-        # Set milestone
-        title = row2[0]
-        due_on = row2[1]
-        url = 'https://api.github.com/repos/%s/%s/milestones' % (REPO_OWNER, repo_name)
-        params = {"title":title, "due_on":due_on}
-        response = requests.post(url, json=params, headers=HEADER)
-        line_count+=1
+                f1_count+=1
+else:
+    with open(REPO_LIST) as csv_file:
+        csv = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv:
+            if line_count == 0:
+                line_count+=1
+            else:
+                set_milestone(REPO, row)
+                line_count+=1

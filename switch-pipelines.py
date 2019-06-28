@@ -43,19 +43,19 @@ with open('./csv/test-repos.txt') as csv_file:
             issue_url = 'https://api.github.com/repos/%s/%s/issues' % (REPO_OWNER, repo_name)
             issue_response = requests.get(issue_url, headers=GIT_HEADER)
             issue_data = json.loads(issue_response.text)
-            issues = []
+            issues_num = []
             for j, item in enumerate(issue_data):
-                    issues.append(issue_data[j]['number'])
+                    issues_num.append(issue_data[j]['number'])
 
             # get pull requests data
             pr_url = 'https://api.github.com/repos/%s/%s/pulls?state=all' % (REPO_OWNER, repo_name)
             pr_response = requests.get(pr_url, headers=GIT_HEADER)
             pr_data = json.loads(pr_response.text)
-            pulls = []
-            pulls_num = []
+            pr_num = []
+            pr_merges = []
             for k, item in enumerate(pr_data):
-                    pulls.append(re.split(':| |-',(pr_data[k]['title']))[0])
-                    pulls_num.append([pr_data[k]['number'], pr_data[k]['merged_at']])
+                    pr_num.append(re.split(':| |-',(pr_data[k]['title']))[0])
+                    pr_merges.append(pr_data[k]['merged_at'])
 
             # get board data
             board_url = 'https://api.zenhub.io/p1/repositories/%s/board' % (repo_id)
@@ -66,25 +66,24 @@ with open('./csv/test-repos.txt') as csv_file:
             staging_id = board_data['pipelines'][STAGING]['id']
 
             # move issue to 'In Progress' if it corresponds to a feature branch
-            for num in issues:
+            for num in issues_num:
                     if str(num) in branches:
                             url = 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, num)
                             params = {'pipeline_id':in_progress_id, 'position':'bottom'}
                             response = requests.post(url, json=params, headers=ZEN_HEADER)
 
             # move issue to 'Review/QA' if PR has been opened
-            for num in issues:
-                    if str(num) in pulls:
+            for num in issues_num:
+                    if str(num) in pr_num:
                             url= 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, num)
                             params = {'pipeline_id':review_id, 'position':'bottom'}
                             response = requests.post(url, json=params, headers=ZEN_HEADER)
 
             # move issue to 'Staging' if PR has been merged into develop
-            for num, merged_at in pulls_num:
+            for num, merged_at in zip(pr_num, pr_merges):
                     if (merged_at != None):
-                        url = 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, num)
+                        url = 'https://api.zenhub.io/p1/repositories/%s/issues/%d/moves' % (repo_id, int(num))
                         params = {'pipeline_id':staging_id, 'position':'bottom'}
                         response = requests.post(url, json=params, headers=ZEN_HEADER)
 
             line_count+=1
-  
