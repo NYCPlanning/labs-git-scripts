@@ -48,7 +48,7 @@ with open('./csv/test-repos.txt') as csv_file:
                     issues_num.append(issue_data[j]['number'])
 
             # get pull requests data
-            pr_url = 'https://api.github.com/repos/%s/%s/pulls?state=all' % (REPO_OWNER, repo_name)
+            pr_url = 'https://api.github.com/repos/%s/%s/pulls?state=all&base=develop' % (REPO_OWNER, repo_name)
             pr_response = requests.get(pr_url, headers=GIT_HEADER)
             pr_data = json.loads(pr_response.text)
             pr_num = []
