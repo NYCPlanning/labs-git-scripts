@@ -15,7 +15,7 @@ CONFIG = {"url":"http://plannerbot.planninglabs.nyc/hubot/github-repo-listener",
 def create_hook(repo):
     url = 'https://api.github.com/repos/%s/%s/hooks' % (REPO_OWNER, repo)
     # webhook triggered by all repo events (creation, renamed, etc.)
-    events = ['repository', 'push']
+    events = ['repository', 'push', 'pull_request']
     params = {"config":CONFIG, "events":events}
     response = requests.post(url, json=params, headers=HEADER)
 
