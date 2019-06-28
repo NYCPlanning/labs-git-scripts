@@ -10,7 +10,7 @@ REPO_LIST = './csv/repos.txt'
 REPO_OWNER = 'NYCPlanning'
 TOKEN = os.environ['GITHUB_PERSONAL_ACCESS_TOKEN']
 HEADER = {'Authorization': 'token ' + TOKEN, 'Accept': 'application/vnd.github.symmetra-preview+json'}
-CONFIG = {"url":"http://plannerbot.planninglabs.nyc/hubot/github-repo-listener"}
+CONFIG = {"url":"http://plannerbot.planninglabs.nyc/hubot/github-repo-listener", "content_type": "json"}
 
 def create_repo_hook(repo):
     url = 'https://api.github.com/repos/%s/%s/hooks' % (REPO_OWNER, repo)
