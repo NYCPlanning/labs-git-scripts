@@ -10,7 +10,15 @@ REPO_OWNER = 'NYCPlanning'
 REPO_LIST = './csv/test-repos.txt'
 HEADER = {'Authorization': 'token ' + TOKEN, 'Accept': 'application/vnd.github.symmetra-preview+json'}
 
-TO_DELETE = ['bug', 'duplicate', 'enhancement', 'help%20wanted', 'good%20first%20issue', 'invalid', 'question', 'wontfix', 'documentation']
+TO_DELETE = ['bug',
+    'duplicate',
+    'enhancement',
+    'help%20wanted',
+    'good%20first%20issue',
+    'invalid',
+    'question',
+    'wontfix',
+    'documentation']
 
 TO_CREATE = ['Strategic',
              'High ROI',
@@ -27,6 +35,7 @@ TO_CREATE = ['Strategic',
              'New Feature',
              'Needs Clarification',
              'Greenskeeper']
+
 DESC = ['High impact, high level of effort. Used for work prioritization.',
         'High impact, low level of effort. Used for work prioritization.',
         'Low impact, low level of effort. Used for work prioritization.',
@@ -40,8 +49,24 @@ DESC = ['High impact, high level of effort. Used for work prioritization.',
         'Related to improving accessibility for all users, including those with disabilities',
         'Feedback provided by a user',
         'Request for a new feature or new functionality',
-        'Issue or user story is unclear. More info needed.']
-COLORS = ['6600bb', '660066', 'bb0066', 'bb00bb', '92ad27', 'd36315', 'e21f18', 'eaac72', 'e5df37', '32c9a6', 'aee5ef', '5319e7', 'c9f29b', '2278c9', '378403']
+        'Issue or user story is unclear. More info needed.',
+        'To be handled by rotating, on-call Greenskeeper role.']
+
+COLORS = ['6600bb',
+    '660066',
+    'bb0066',
+    'bb00bb',
+    '92ad27',
+    'd36315',
+    'e21f18',
+    'eaac72',
+    'e5df37',
+    '32c9a6',
+    'aee5ef',
+    '5319e7',
+    'c9f29b',
+    '2278c9',
+    '378403']
 
 # Delete GitHub's default labels
 def delete_labels(repo):
@@ -72,5 +97,3 @@ if REPO == 'all':
 else:
     delete_labels(REPO)
     create_labels(REPO)
-
-               
