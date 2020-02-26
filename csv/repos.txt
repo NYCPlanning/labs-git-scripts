@@ -2,6 +2,7 @@ Repos
 ceqr-app
 ember-labs-maps
 labs-app-currently-down
+labs-applicant-portal
 labs-applicantmaps
 labs-applicantmaps-api
 labs-cd-files
