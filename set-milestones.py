@@ -7,7 +7,7 @@ import sys
 TOKEN = sys.argv[1]
 REPO = sys.argv[2]
 REPO_OWNER = 'NYCPlanning'
-REPO_LIST = './csv/test-repos.txt'
+REPO_LIST = './csv/repos.txt'
 SPRINT_LIST = './csv/sprints.txt'
 HEADER = {'Authorization': 'token ' + TOKEN}
 
@@ -22,7 +22,7 @@ if REPO == 'all':
     with open(REPO_LIST) as csv_file:
         csv_f1 = csv.reader(csv_file, delimiter=',')
         f1_count = 0
-        for row in csv_f1: 
+        for row in csv_f1:
             if f1_count == 0:
                 f1_count+=1
             else:
